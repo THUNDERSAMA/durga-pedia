@@ -1,3 +1,7 @@
+// This file was automatically added by edgio init.
+// You should commit this file to source control.
+const { withEdgio } = require('@edgio/next/config')
+
 // /** @type {import('next').NextConfig} */
 // const withPWA=require ('next-pwa');
 // const nextConfig = {
@@ -16,11 +20,16 @@ const withPWA = require('next-pwa')({
     skipWaiting:true,
     disable:process.env.NODE_ENV === 'development'
       })
-    
-    /** @type {import('next').NextConfig} */
-    const nextConfig = {
-    reactStrictMode: true,
-        output: 'export'
-     }
-    
-    module.exports = withPWA(nextConfig);
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+reactStrictMode: true,
+    output: 'export'
+ }
+
+const _preEdgioExport = withPWA(nextConfig);;
+
+module.exports = (phase, config) =>
+  withEdgio({
+    ..._preEdgioExport
+  })
